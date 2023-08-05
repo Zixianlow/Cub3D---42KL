@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/03 14:49:16 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:00:06 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_dis
 typedef struct s_game
 {
 	int			frame;
+	int			type;
 	double		posx;
 	void		*mlx;
 	void		*win;

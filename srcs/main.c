@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/03 19:21:49 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:54:02 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	render_next_frame(t_game *game)
 {
-	mlx_clear_window(game->mlx, game->win);
+	// mlx_clear_window(game->mlx, game->win);
 	draw_player(game);
 	return (0);
 }
@@ -83,7 +83,19 @@ int	kclose(int keycode, t_game *game)
 		game->player.angle -= M_PI / 36;
 	if (keycode == 124)
 		game->player.angle += M_PI / 36;
-	render_next_frame(game);
+	return (0);
+}
+
+int	ft_animate(t_game *game)
+{
+	game->frame++;
+	if (game->frame % 500 == 1)
+	{
+		mlx_clear_window(game->mlx, game->win);
+		render_next_frame(game);
+	}
+	if (game->frame == 5000)
+		game->frame = 0;
 	return (0);
 }
 
@@ -95,6 +107,8 @@ int	main(int ac, char **av)
 		return (0);
 	game.tex = NULL;
 	game.mlx = mlx_init();
+	game.frame = 0;
+	game.type = 0;
 	if (ft_get_map(&game, av[1]))
 		return (0);
 	ft_get_line(&game);
@@ -102,5 +116,6 @@ int	main(int ac, char **av)
 			MAP_H * TILE_SIZE, "cub3d");
 	render_next_frame(&game);
 	mlx_hook(game.win, 2, (1L << 0), kclose, &game);
+	mlx_loop_hook(game.mlx, ft_animate, &game);
 	mlx_loop(game.mlx);
 }

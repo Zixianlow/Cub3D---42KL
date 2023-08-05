@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/03 19:22:28 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:55:56 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ double	calc_dis(double px, double py, double tx, double ty)
 	return (x * x + y * y);
 }
 
+int	ft_get_color(unsigned char *data, int i)
+{
+	return ((data[i + 2] << 16) | (data[i + 1] << 8) | (data[i]) | 0);
+}
+
 void	draw_view(t_game *game, int pos)
 {
 	int y = 0;
@@ -35,24 +40,33 @@ void	draw_view(t_game *game, int pos)
 	double b = game->dis.wh * 10 * TILE_SIZE;
 	double startx = game->player.x;
 	double starty = game->player.y;
+	t_tex	*temp;
 	int old_x;
 	int old_y;
 	int old_index;
 	unsigned int color;
 
+	temp = game->tex;
+	while (temp->next)
+	{
+		if (temp->type != game->type)
+			temp = temp->next;
+		else
+			break ;
+	}
 	while (startx > 1)
 		startx--;
 	while (starty > 1)
 		starty--;
 	if (pos < 251)
 		y = 150;
-	while(y < a)
+	while (y < a)
 	{
 		mlx_pixel_put(game->mlx, game->win, pos, y, game->fc.ceiling_rgb);
 		y++;
 	}
 	y = 10 * TILE_SIZE;
-	while(y > a + b)
+	while (y > a + b)
 	{
 		mlx_pixel_put(game->mlx, game->win, pos, y, game->fc.floor_rgb);
 		y--;
@@ -63,12 +77,12 @@ void	draw_view(t_game *game, int pos)
 		if (a < 150)
 			y = 150;
 	}
-	while(y < a + b)
+	while (y < a + b)
 	{
-		old_x = game->posx * game->tex->img_w;
-        old_y = (y - a) * game->tex->img_h / b;
-        old_index = (old_y * game->tex->img_w + old_x) * 4;
-		color = (game->tex->img_data[old_index + 2] << 16) | (game->tex->img_data[old_index + 1] << 8) | game->tex->img_data[old_index];
+		old_x = game->posx * temp->img_w;
+		old_y = (y - a) * temp->img_h / b;
+		old_index = (old_y * temp->img_w + old_x) * 4;
+		color = ft_get_color(temp->img_data, old_index);
 		mlx_pixel_put(game->mlx, game->win, pos, y, color);
 		y++;
 	}
@@ -139,12 +153,16 @@ double ft_get_intersect(t_game *game, double px, double py, double *lx, double *
 				tdis = -1;
 		}
 		if (fdis == -1)
+		{
 			fdis = tdis;
+			game->type = temp->type;
+		}
 		if (tdis != -1 && fdis >= tdis)
 		{
 			fdis = tdis;
 			fx = tx;
 			fy = ty;
+			game->type = temp->type;
 		}
 		temp = temp->next;
 	}
@@ -152,7 +170,10 @@ double ft_get_intersect(t_game *game, double px, double py, double *lx, double *
 	{
 		*lx = fx;
 		*ly = fy;
-		game->posx = fy;
+		if (game->type == 1 || game->type == 2)
+			game->posx = fy;
+		else if (game->type == 3 || game->type == 4)
+			game->posx = fx;
 		while (game->posx > 1)
 			game->posx--;
 	}

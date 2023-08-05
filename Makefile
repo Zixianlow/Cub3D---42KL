@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/02 17:41:12 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/05 16:23:57 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS        =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(MAN_FILES)))
 OBJS        =	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(MAN_FILES)))
 ARCR		= 	ar cr 
 RMRF		=	rm -rf
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Werror
 GCC			=	gcc
 
 
@@ -38,7 +38,7 @@ $(OBJS_DIR)%.o:	$(SRC_DIR)%.c
 	@$(GCC) ${RLINC} -c $< -o $@
 
 $(NAME):	${OBJS}
-	${GCC} ${CFLAGS} ${OBJS} -lmlx -framework OpenGL -framework AppKit -lm -o $(NAME)
+	${GCC} ${CFLAGS} ${OBJS} -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	
 clean:
 	${RMRF} ${OBJS} ${OBJS_DIR}
