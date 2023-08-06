@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/06 13:53:44 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/06 20:12:04 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,13 @@ void	ft_node_dis(t_game *game, double d, double a)
 	double	diff;
 
 	i = 0;
-	diff = a - game->player.angle;
+	diff = (a - game->player.angle);
+	d *= cos(diff);
 	d *= cos(diff);
 	d = fabs(d);
 	if (d < 0.01)
 		d = 0.01;
-	i = 1 / d;
+	i = game->tune / d;
 	j = (1 - i) / 2;
 	game->dis.sh = j;
 	game->dis.wh = i;
@@ -180,6 +181,27 @@ double ft_get_intersect(t_game *game, double px, double py, double *lx, double *
 	return (fdis);
 }
 
+void draw_line(t_game *game, double x1, double y1, double a)
+{
+    double delta_x = (game->player.x + cos(a) - x1) * 16;
+    double delta_y = (game->player.y + sin(a) - y1) * 16;
+    double step = fmax(fabs(delta_x), fabs(delta_y));
+    double x_increment = delta_x / step;
+    double y_increment = delta_y / step;
+    double x = 75;
+    double y = 125;
+
+    int i = 0;
+    while (i <= step)
+    {
+		if (x >= 0 && x <= 150 && y >= 0 && y <= 250)
+        	mlx_pixel_put(game->mlx, game->win, y, x, 0xFF0000);
+        x += x_increment;
+        y -= y_increment;
+        i++;
+    }
+}
+
 void	draw_player(t_game *game)
 {
 	double	line_x;
@@ -189,21 +211,25 @@ void	draw_player(t_game *game)
 	int		i;
 
 	i = 0;
-	a = game->player.angle - M_PI * 6.8 / 72;
+	a = game->player.angle - M_PI * 13.6 / 72;
 	while (i < 640)
 	{
-		if (i % 2 == 1)
+		if (i % 3 > 0)
+		{
 			draw_view(game, i);
+			draw_line(game, game->player.x, game->player.y, a);
+		}
 		else
 		{
 			line_x = game->player.x + (cos(a) * 10);
 			line_y = game->player.y + (sin(a) * 10);
+			draw_line(game, game->player.x, game->player.y, a);
 			dis = ft_get_intersect(game, game->player.x, game->player.y,
 					&line_x, &line_y);
 			ft_node_dis(game, dis, a);
 			draw_view(game, i);
 		}
-		a += M_PI * 0.02 / 72;
+		a += M_PI * 0.04 / 72;
 		i++;
 	}
 }

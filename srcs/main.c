@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/06 15:33:29 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/06 20:06:20 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ int	kclose(int keycode, t_game *game)
 		wall_collision(game, 0);
 	if (keycode == 0)
 		wall_collision(game, 3);
+	if (keycode == 3)
+		game->tune -= 0.1;
+	if (keycode == 5)
+		game->tune += 0.1;
 	if (keycode == 123)
 		game->player.angle -= M_PI / 36;
 	if (keycode == 124)
@@ -123,6 +127,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (0);
+	game.tune = 2;
 	game.tex = NULL;
 	game.mlx = mlx_init();
 	game.frame = 0;
