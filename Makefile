@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/05 16:23:57 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/06 14:03:53 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ OBJS_DIR    =   objs/
 MAN_FILES	=	main					\
 				get_next_line			\
 				get_next_line_utils		\
+				ft_draw_minimap			\
 				ft_draw_player			\
 				ft_get_texture_path		\
 				ft_get_line 			\

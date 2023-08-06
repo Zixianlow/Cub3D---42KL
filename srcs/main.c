@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/05 20:54:02 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/06 15:33:29 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	render_next_frame(t_game *game)
 {
 	// mlx_clear_window(game->mlx, game->win);
 	draw_player(game);
+	draw_minimap(game);
 	return (0);
 }
 
@@ -38,13 +39,13 @@ void	wall_collision(t_game *game, int move)
 	i = game->player.x + 0.2 * cos(a);
 	j = game->player.y + 0.2 * sin(a);
 	if (cos(a) > 0)
-		x = i + 0.1;
+		x = i + 0.2;
 	else
-		x = i - 0.1;
+		x = i - 0.2;
 	if (sin(a) > 0)
-		y = j + 0.1;
+		y = j + 0.2;
 	else
-		y = j - 0.1;
+		y = j - 0.2;
 	if (game->map[x][y] != '1')
 	{
 		game->player.x = i;
@@ -86,6 +87,23 @@ int	kclose(int keycode, t_game *game)
 	return (0);
 }
 
+int	mouse_hook(int x, int y, t_game *game)
+{
+	static int	prev_x = -1;
+	int			dx;
+
+	(void) y;
+	if (prev_x == -1)
+		prev_x = x;
+	dx = x - prev_x;
+	if (abs(dx) > 5)
+	{
+		game->player.angle += M_PI * dx / 720;
+		prev_x = x;
+	}
+	return (0);
+}
+
 int	ft_animate(t_game *game)
 {
 	game->frame++;
@@ -116,6 +134,7 @@ int	main(int ac, char **av)
 			MAP_H * TILE_SIZE, "cub3d");
 	render_next_frame(&game);
 	mlx_hook(game.win, 2, (1L << 0), kclose, &game);
+	mlx_hook(game.win, 6, (1L << 6), mouse_hook, &game);
 	mlx_loop_hook(game.mlx, ft_animate, &game);
 	mlx_loop(game.mlx);
 }

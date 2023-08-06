@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/05 20:00:06 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/06 14:03:29 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_game
 
 void	ft_get_texture_path(t_game *game, int fd);
 int		ft_get_map(t_game *game, char *path);
+void	draw_minimap(t_game *game);
 void	ft_get_line(t_game *game);
 int		ft_atoi(const char *str);
 int		ft_strlen(char *str);

@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 16:57:15 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/05 20:54:49 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/06 14:24:53 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ void	ft_node_line3(t_game *game, int i, int j)
 	else
 	{
 		while (temp->next)
-		{
 			temp = temp->next;
-		}
 		temp->next = node;
 	}
 }
@@ -101,25 +99,23 @@ void	ft_node_line4(t_game *game, int i, int j)
 	else
 	{
 		while (temp->next)
-		{
 			temp = temp->next;
-		}
 		temp->next = node;
 	}
 }
 
 void	ft_init_player(t_game *game, int i, int j, char ch)
 {
-	game->player.x = i;
-	game->player.y = j;
-	if (ch == 'N')
+	game->player.x = i + 0.5;
+	game->player.y = j + 0.5;
+	if (ch == 'E')
 		game->player.angle = 0;
-	else if (ch == 'E')
-		game->player.angle = M_PI / 4;
 	else if (ch == 'S')
 		game->player.angle = M_PI / 2;
 	else if (ch == 'W')
-		game->player.angle = M_PI * 3 / 4;
+		game->player.angle = M_PI;
+	else if (ch == 'N')
+		game->player.angle = M_PI * 1.5;
 }
 
 void	ft_get_line(t_game *game)

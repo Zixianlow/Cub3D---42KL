@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/05 20:55:56 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/06 13:53:44 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	ft_node_dis(t_game *game, double d, double a)
 	diff = a - game->player.angle;
 	d *= cos(diff);
 	d = fabs(d);
-	if (d < 0.75)
-		d = 0.75;
+	if (d < 0.01)
+		d = 0.01;
 	i = 1 / d;
 	j = (1 - i) / 2;
 	game->dis.sh = j;
@@ -189,7 +189,7 @@ void	draw_player(t_game *game)
 	int		i;
 
 	i = 0;
-	a = game->player.angle - M_PI * 20 / 72;
+	a = game->player.angle - M_PI * 6.8 / 72;
 	while (i < 640)
 	{
 		if (i % 2 == 1)
@@ -203,7 +203,7 @@ void	draw_player(t_game *game)
 			ft_node_dis(game, dis, a);
 			draw_view(game, i);
 		}
-		a += M_PI * 0.04 / 72;
+		a += M_PI * 0.02 / 72;
 		i++;
 	}
 }
