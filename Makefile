@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/06 19:10:31 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/08 18:50:37 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,15 @@ MAN_FILES	=	main					\
 				get_next_line_utils		\
 				ft_draw_minimap			\
 				ft_draw_player			\
+				ft_draw_line			\
+				ft_draw_view			\
 				ft_get_texture_path		\
 				ft_get_line 			\
 				ft_get_map 				\
+				ft_intersect			\
+				ft_door 				\
+				ft_hook 				\
+				ft_node 				\
 				ft_atoi					
 OBJS 		=	$(SRCS:.c=.o)
 SRCS        =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(MAN_FILES)))

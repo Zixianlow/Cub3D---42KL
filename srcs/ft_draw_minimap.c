@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:25:48 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 15:58:12 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:46:08 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_x(t_game *game, double mx)
 	return ((int)(game->player.x + mx / 25 - 3));
 }
 
-void	draw_minimap(t_game *game)
+void	ft_draw_minimap(t_game *game)
 {
 	double	mx;
 	double	my;

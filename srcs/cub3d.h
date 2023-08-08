@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 17:09:06 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:52:04 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define MAP_W 10
 # define MAP_H 10
 # define TILE_SIZE 64
-# define FOV_A M_PI / 3
 
 typedef struct s_line
 {
@@ -78,6 +77,17 @@ typedef struct s_dis
 	double	fh;
 }	t_dis;
 
+typedef struct s_inter
+{
+	double	x[4];
+	double	tx;
+	double	ty;
+	double	fx;
+	double	fy;
+	double	tdis;
+	double	fdis;
+}	t_inter;
+
 typedef struct s_game
 {
 	double		tune;
@@ -89,6 +99,7 @@ typedef struct s_game
 	t_fc		fc;
 	t_tex		*tex;
 	t_dis		dis;
+	t_inter		v;
 	t_player	player;
 	t_line		*line;
 	char		**map;
@@ -96,15 +107,21 @@ typedef struct s_game
 
 void	ft_get_texture_path(t_game *game, int fd);
 int		ft_get_map(t_game *game, char *path);
-void	draw_minimap(t_game *game);
+void	ft_draw_minimap(t_game *game);
 void	ft_get_line(t_game *game);
 int		ft_atoi(const char *str);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *s1);
-void	draw_player(t_game *game);
+void	ft_draw_player(t_game *game);
+void	ft_door_open(t_game *game);
+int		kclose(int keycode, t_game *game);
+int		mouse_hook(int x, int y, t_game *game);
+void	ft_draw_view(t_game *game, int pos);
+void	ft_draw_line(t_game *game, double x1, double y1, double a);
 void	ft_node_line1(t_game *game, int i, int j, int type);
 void	ft_node_line2(t_game *game, int i, int j, int type);
 void	ft_node_line3(t_game *game, int i, int j, int type);
 void	ft_node_line4(t_game *game, int i, int j, int type);
+double 	ft_get_intersect(t_game *game, double px, double py, double *lx, double *ly);
 
 #endif
