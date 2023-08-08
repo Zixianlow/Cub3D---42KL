@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/06 20:06:20 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:09:31 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	render_next_frame(t_game *game)
 	return (0);
 }
 
-/* 0 = up, 2 = down, 3 = left, 1 = right*/
 void	wall_collision(t_game *game, int move)
 {
 	double	a;
@@ -36,8 +35,8 @@ void	wall_collision(t_game *game, int move)
 		a += 2 * M_PI;
 	if (a > 2 * M_PI)
 		a -= 2 * M_PI;
-	i = game->player.x + 0.2 * cos(a);
-	j = game->player.y + 0.2 * sin(a);
+	i = game->player.x + 0.1 * cos(a);
+	j = game->player.y + 0.1 * sin(a);
 	if (cos(a) > 0)
 		x = i + 0.2;
 	else
@@ -46,7 +45,7 @@ void	wall_collision(t_game *game, int move)
 		y = j + 0.2;
 	else
 		y = j - 0.2;
-	if (game->map[x][y] != '1')
+	if (game->map[x][y] != '1' && game->map[x][y] != '2')
 	{
 		game->player.x = i;
 		game->player.y = j;
@@ -65,8 +64,100 @@ void	ft_slesc_free_n_exit(t_game *game)
 	exit(0);
 }
 
+void	ft_remove_line(t_game *game, int px, int py)
+{
+	t_line	*temp;
+
+	temp = game->line;
+	while (temp->next->next)
+	{
+		if (temp->next->x == px && temp->next->y == py)
+		{
+			temp->next = temp->next->next->next->next->next;
+			break ;
+		}
+		temp = temp->next;
+	}
+}
+
+void	ft_add_line(t_game *game, int px, int py)
+{
+	ft_node_line1(game, px, py, 2);
+	ft_node_line2(game, px, py, 2);
+	ft_node_line3(game, px, py, 2);
+	ft_node_line4(game, px, py, 2);
+}
+
+void	door_open(t_game *game)
+{
+	int	px;
+	int	py;
+
+	px = game->player.x + 2;
+	py = game->player.y;
+	if (game->map[px][py])
+	{
+		if (game->map[px][py] == '2')
+		{
+			ft_remove_line(game, px, py);
+			game->map[px][py] = '3';
+		}
+		else if (game->map[px][py] == '3')
+		{
+			ft_add_line(game, px, py);
+			game->map[px][py] = '2';
+		}
+	}
+	px = game->player.x - 2;
+	py = game->player.y;
+	if (game->map[px][py])
+	{
+		if (game->map[px][py] == '2')
+		{
+			ft_remove_line(game, px, py);
+			game->map[px][py] = '3';
+		}
+		else if (game->map[px][py] == '3')
+		{
+			ft_add_line(game, px, py);
+			game->map[px][py] = '2';
+		}
+	}
+	px = game->player.x;
+	py = game->player.y + 2;
+	if (game->map[px][py])
+	{
+		if (game->map[px][py] == '2')
+		{
+			ft_remove_line(game, px, py);
+			game->map[px][py] = '3';
+		}
+		else if (game->map[px][py] == '3')
+		{
+			ft_add_line(game, px, py);
+			game->map[px][py] = '2';
+		}
+	}
+	px = game->player.x;
+	py = game->player.y - 2;
+	if (game->map[px][py])
+	{
+		if (game->map[px][py] == '2')
+		{
+			ft_remove_line(game, px, py);
+			game->map[px][py] = '3';
+		}
+		else if (game->map[px][py] == '3')
+		{
+			ft_add_line(game, px, py);
+			game->map[px][py] = '2';
+		}
+	}
+}
+
 int	kclose(int keycode, t_game *game)
 {
+	// printf("%d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(game->mlx, game->win);
@@ -81,13 +172,11 @@ int	kclose(int keycode, t_game *game)
 	if (keycode == 0)
 		wall_collision(game, 3);
 	if (keycode == 3)
-		game->tune -= 0.1;
-	if (keycode == 5)
-		game->tune += 0.1;
+		door_open(game);
 	if (keycode == 123)
-		game->player.angle -= M_PI / 36;
+		game->player.angle -= M_PI / 72;
 	if (keycode == 124)
-		game->player.angle += M_PI / 36;
+		game->player.angle += M_PI / 72;
 	return (0);
 }
 
@@ -127,7 +216,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (0);
-	game.tune = 2;
+	game.tune = 1;
 	game.tex = NULL;
 	game.mlx = mlx_init();
 	game.frame = 0;

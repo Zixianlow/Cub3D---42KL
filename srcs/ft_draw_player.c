@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/07 15:01:31 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:11:18 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_view(t_game *game, int pos)
 {
 	int y = 0;
 	double a = game->dis.sh * 10 * TILE_SIZE;
-	double b = game->dis.wh * 10 * TILE_SIZE;
+	double b = ceil(game->dis.wh * 10 * TILE_SIZE);
 	double startx = game->player.x;
 	double starty = game->player.y;
 	t_tex	*temp;
@@ -60,13 +60,13 @@ void	draw_view(t_game *game, int pos)
 		starty--;
 	if (pos < 251)
 		y = 150;
-	while (y < a)
+	while (b < 640 && y < a)
 	{
 		mlx_pixel_put(game->mlx, game->win, pos, y, game->fc.ceiling_rgb);
 		y++;
 	}
 	y = 10 * TILE_SIZE;
-	while (y > a + b)
+	while (b < 640 && y > a + b)
 	{
 		mlx_pixel_put(game->mlx, game->win, pos, y, game->fc.floor_rgb);
 		y--;
@@ -81,10 +81,15 @@ void	draw_view(t_game *game, int pos)
 	{
 		old_x = game->posx * temp->img_w;
 		old_y = (y - a) * temp->img_h / b;
-		old_index = (old_y * temp->img_w + old_x) * 4;
-		color = ft_get_color(temp->img_data, old_index);
-		mlx_pixel_put(game->mlx, game->win, pos, y, color);
+		if (old_y >= 0 && old_x >= 0)
+		{
+			old_index = (old_y * temp->img_w + old_x) * 4;
+			color = ft_get_color(temp->img_data, old_index);
+			mlx_pixel_put(game->mlx, game->win, pos, y, color);
+		}
 		y++;
+		// if (y > 640)
+		// 	break ;
 	}
 }
 
@@ -95,16 +100,13 @@ void	ft_node_dis(t_game *game, double d, double a)
 	double	diff;
 
 	i = 0;
-	if (a > game->player.angle)
-		diff = (a - game->player.angle);
-	else
-		diff = game->player.angle - a;
-	d *= cos(diff);
+	diff = a - game->player.angle;
+	d = sqrt(d);
 	d *= cos(diff);
 	d = fabs(d);
 	if (d < 0.01)
 		d = 0.01;
-	i = 5 / d;
+	i = 1.5 / d;
 	j = (1 - i) / 2;
 	game->dis.sh = j;
 	game->dis.wh = i;
@@ -134,7 +136,7 @@ double ft_get_intersect(t_game *game, double px, double py, double *lx, double *
 
 	temp = game->line;
 	fdis = -1;
-	while (temp->next)
+	while (temp)
 	{
 		x1 = temp->ax;
 		y1 = temp->ay;
@@ -174,9 +176,9 @@ double ft_get_intersect(t_game *game, double px, double py, double *lx, double *
 	{
 		*lx = fx;
 		*ly = fy;
-		if (game->type == 1 || game->type == 2)
+		if (game->type == 1 || game->type == 2 || game->type == 5)
 			game->posx = fy;
-		else if (game->type == 3 || game->type == 4)
+		else if (game->type == 3 || game->type == 4 || game->type == 6)
 			game->posx = fx;
 		while (game->posx > 1)
 			game->posx--;
@@ -195,14 +197,14 @@ void draw_line(t_game *game, double x1, double y1, double a)
     double y = 125;
 
     int i = 0;
-    while (i <= step)
-    {
+	while (i <= step)
+	{
 		if (x >= 0 && x <= 150 && y >= 0 && y <= 250)
-        	mlx_pixel_put(game->mlx, game->win, y, x, 0xFF0000);
-        x += x_increment;
-        y -= y_increment;
-        i++;
-    }
+			mlx_pixel_put(game->mlx, game->win, y, x, 0xFF0000);
+		x += x_increment;
+		y -= y_increment;
+		i++;
+	}
 }
 
 void	draw_player(t_game *game)
@@ -214,25 +216,17 @@ void	draw_player(t_game *game)
 	int		i;
 
 	i = 0;
-	a = game->player.angle - M_PI * 3.2 / 72;
+	a = game->player.angle - M_PI * 8 / 72;
 	while (i < 640)
 	{
-		if (i % 3 > 0)
-		{
-			draw_view(game, i);
-			draw_line(game, game->player.x, game->player.y, a);
-		}
-		else
-		{
-			line_x = game->player.x + (cos(a) * 10);
-			line_y = game->player.y + (sin(a) * 10);
-			draw_line(game, game->player.x, game->player.y, a);
-			dis = ft_get_intersect(game, game->player.x, game->player.y,
-					&line_x, &line_y);
-			ft_node_dis(game, dis, a);
-			draw_view(game, i);
-		}
-		a += M_PI * 0.01 / 72;
+		line_x = game->player.x + (cos(a) * 10);
+		line_y = game->player.y + (sin(a) * 10);
+		draw_line(game, game->player.x, game->player.y, a);
+		dis = ft_get_intersect(game, game->player.x, game->player.y,
+				&line_x, &line_y);
+		ft_node_dis(game, dis, a);
+		draw_view(game, i);
+		a += M_PI * 0.025 / 72;
 		i++;
 	}
 }

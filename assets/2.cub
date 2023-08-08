@@ -1,4 +1,4 @@
-NO ./assets/door.xpm
+NO ./assets/wall2.xpm
 SO ./assets/door_open.xpm
 WE ./assets/floor.xpm
 EA ./assets/wall.xpm

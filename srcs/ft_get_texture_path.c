@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:29:05 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/05 20:10:21 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/07 18:06:46 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,6 @@ void	ft_get_texture_path(t_game *game, int fd)
 		i++;
 		free(path);
 	}
+	ft_node_texture(game, "./assets/door.xpm", 5);
+	ft_node_texture(game, "./assets/door.xpm", 6);
 }

@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:25:48 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/06 19:11:58 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:58:12 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,17 @@ void	draw_minimap(t_game *game)
 		my = 0;
 		while (my <= 250)
 		{
-			if (game->map[get_x(game, mx)])
+			if (get_x(game, mx) >= 0 && get_y(game, my) >= 0
+				&& game->map[get_x(game, mx)])
+			{
 				if (game->map[get_x(game, mx)][get_y(game, my)])
+				{
 					if (game->map[get_x(game, mx)][get_y(game, my)] == '1')
 						mlx_pixel_put(game->mlx, game->win, my, mx, 0xFFFFFF);
+					else if (game->map[get_x(game, mx)][get_y(game, my)] == '2')
+						mlx_pixel_put(game->mlx, game->win, my, mx, 0x0000FF);
+				}
+			}
 			my++;
 		}
 		mx++;

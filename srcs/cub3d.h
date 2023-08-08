@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/06 20:03:27 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:09:06 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 
 typedef struct s_line
 {
+	int				x;
+	int				y;
 	double			ax;
 	double			ay;
 	double			bx;
@@ -100,5 +102,9 @@ int		ft_atoi(const char *str);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *s1);
 void	draw_player(t_game *game);
+void	ft_node_line1(t_game *game, int i, int j, int type);
+void	ft_node_line2(t_game *game, int i, int j, int type);
+void	ft_node_line3(t_game *game, int i, int j, int type);
+void	ft_node_line4(t_game *game, int i, int j, int type);
 
 #endif
