@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 19:52:04 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:02:46 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_game
 	t_player	player;
 	t_line		*line;
 	char		**map;
+	char		**file;
 }	t_game;
 
 void	ft_get_texture_path(t_game *game, int fd);
@@ -123,5 +124,7 @@ void	ft_node_line2(t_game *game, int i, int j, int type);
 void	ft_node_line3(t_game *game, int i, int j, int type);
 void	ft_node_line4(t_game *game, int i, int j, int type);
 double 	ft_get_intersect(t_game *game, double px, double py, double *lx, double *ly);
+char	*check_f(t_game *game);
+char	*check_c(t_game *game);
 
 #endif
