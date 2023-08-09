@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 21:02:46 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:07:39 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_game
 	t_player	player;
 	t_line		*line;
 	char		**map;
+	char		**map2;
 	char		**file;
 }	t_game;
 

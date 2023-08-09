@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:51:14 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 17:51:27 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/09 17:30:44 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,27 @@ void	ft_door_line(t_game *game, int px, int py)
 
 void	ft_door_open(t_game *game)
 {
-	ft_door_line(game, game->player.x + 2, game->player.y);
-	ft_door_line(game, game->player.x + 1, game->player.y);
-	ft_door_line(game, game->player.x - 2, game->player.y);
-	ft_door_line(game, game->player.x - 1, game->player.y);
-	ft_door_line(game, game->player.x, game->player.y + 2);
-	ft_door_line(game, game->player.x, game->player.y + 1);
-	ft_door_line(game, game->player.x, game->player.y - 2);
-	ft_door_line(game, game->player.x, game->player.y - 1);
+	int	m;
+	int	l;
+
+	m = 0;
+	while (game->map[m])
+		m++;
+	if (game->player.x + 2 < m)
+		ft_door_line(game, game->player.x + 2, game->player.y);
+	if (game->player.x + 1 < m)
+		ft_door_line(game, game->player.x + 1, game->player.y);
+	if (game->player.x - 2 >= 0)
+		ft_door_line(game, game->player.x - 2, game->player.y);
+	if (game->player.x - 1 >= 0)
+		ft_door_line(game, game->player.x - 1, game->player.y);
+	l = ft_strlen(game->map[(int)game->player.x]);
+	if (game->player.y + 2 < l)
+		ft_door_line(game, game->player.x, game->player.y + 2);
+	if (game->player.y + 1 < l)
+		ft_door_line(game, game->player.x, game->player.y + 1);
+	if (game->player.y - 2 >= 0)
+		ft_door_line(game, game->player.x, game->player.y - 2);
+	if (game->player.y - 1 >= 0)
+		ft_door_line(game, game->player.x, game->player.y - 1);
 }

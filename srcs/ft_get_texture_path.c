@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:29:05 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/07 18:06:46 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:22:34 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,136 @@ void	ft_node_texture(t_game *game, char *path, int i)
 	}
 }
 
+int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
+{
+	unsigned int	i;
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (i < n)
+	{
+		if (str1[i] != str2[i] || !str1[i] || !str2[i])
+		{
+			return (str1[i] - str2[i]);
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	ft_get_texture_path(t_game *game, int fd)
 {
 	int		i;
 	int		j;
+	int		c;
 	char	*path;
 
-	i = 1;
-	while (i < 5)
+	i = 0;
+	c = 0;
+	while (game->file[i])
 	{
-		j = 0;
-		path = get_next_line(fd);
-		while (path[j])
+		if (!(ft_strncmp(game->file[i], "NO ", 3)))
 		{
-			if (path[j] == '\n')
+			path = ft_strdup(game->file[i]);
+			if ((open(path + 3, O_RDWR)) == -1)
 			{
-				path[j] = '\0';
+				free(path);
 				break ;
 			}
-			j++;
+			ft_node_texture(game, path + 3, 1);
+			free(path);
+			c++;
 		}
-		ft_node_texture(game, path + 3, i);
+		else if (!(ft_strncmp(game->file[i], "SO ", 3)))
+		{
+			path = ft_strdup(game->file[i]);
+			if ((open(path + 3, O_RDWR)) == -1)
+			{
+				free(path);
+				break ;
+			}
+			ft_node_texture(game, path + 3, 2);
+			free(path);
+			c++;
+		}
+		else if (!(ft_strncmp(game->file[i], "WE ", 3)))
+		{
+			path = ft_strdup(game->file[i]);
+			if ((open(path + 3, O_RDWR)) == -1)
+			{
+				free(path);
+				break ;
+			}
+			ft_node_texture(game, path + 3, 3);
+			free(path);
+			c++;
+		}
+		else if (!(ft_strncmp(game->file[i], "EA ", 3)))
+		{
+			path = ft_strdup(game->file[i]);
+			if ((open(path + 3, O_RDWR)) == -1)
+			{
+				free(path);
+				break ;
+			}
+			ft_node_texture(game, path + 3, 4);
+			free(path);
+			c++;
+		}
 		i++;
-		free(path);
+	}
+	if (c != 4)
+	{
+		printf("invalid texture");
+		exit(0);
 	}
 	ft_node_texture(game, "./assets/door.xpm", 5);
 	ft_node_texture(game, "./assets/door.xpm", 6);
+}
+
+char	*check_f(t_game *game)
+{
+	char	*path;
+	int	check;
+	int	i;
+
+	check = 0;
+	i = 0;
+	while (game->file[i])
+	{
+		if (game->file[i][0] == 'F')
+		{
+			path = ft_strdup(game->file[i]);
+			check++;
+		}
+		i++;
+	}
+	if (check == 1)
+		return (path);
+	return (0);
+}
+
+char	*check_c(t_game *game)
+{
+	char	*path;
+	int	check;
+	int	i;
+
+	check = 0;
+	i = 0;
+	while (game->file[i])
+	{
+		if (game->file[i][0]== 'C')
+		{
+			path = ft_strdup(game->file[i]);
+			check++;
+		}
+		i++;
+	}
+	if (check == 1)
+		return (path);
+	return (0);
 }
