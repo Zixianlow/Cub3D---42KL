@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 18:49:57 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:37:49 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	ft_draw_player(t_game *game)
 		line_x = game->player.x + (cos(a) * 10);
 		line_y = game->player.y + (sin(a) * 10);
 		ft_draw_line(game, game->player.x, game->player.y, a);
-		dis = ft_get_intersect(game, game->player.x, game->player.y,
-				&line_x, &line_y);
+		dis = ft_intersect(game, &line_x, &line_y);
 		ft_node_dis(game, dis, a);
 		ft_draw_view(game, i);
 		a += M_PI * 0.025 / 72;

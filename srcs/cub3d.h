@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/09 16:07:39 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:30:52 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,18 @@ void	ft_node_line1(t_game *game, int i, int j, int type);
 void	ft_node_line2(t_game *game, int i, int j, int type);
 void	ft_node_line3(t_game *game, int i, int j, int type);
 void	ft_node_line4(t_game *game, int i, int j, int type);
-double 	ft_get_intersect(t_game *game, double px, double py, double *lx, double *ly);
+double	ft_intersect(t_game *game, double *lx, double *ly);
+void	ft_get_tdis(t_game *game, double *lx, double *ly, t_inter *v);
+void	ft_map2(t_game *game);
+void	ft_makemap(t_game *game, int maxlen);
+void	ft_get_file(t_game *game, int fd);
+void	ft_get_map_tile(t_game *game, int fd);
 char	*check_f(t_game *game);
 char	*check_c(t_game *game);
+void	ft_get_floor_rgb(t_game *game, int fd, char *line);
+void	ft_get_ceiling_rgb(t_game *game, int fd, char *line);
+int		ft_check_element(t_game *game);
+int		ft_check_valid(t_game *game, char **final);
+char	**ft_final_line(t_game *game, int maxlen);
 
 #endif

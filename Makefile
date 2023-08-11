@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/09 17:23:46 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/11 17:31:17 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,15 @@ MAN_FILES	=	main					\
 				ft_draw_line			\
 				ft_draw_view			\
 				ft_get_texture_path		\
+				ft_texture_check		\
+				ft_get_file_map 		\
 				ft_get_line 			\
 				ft_get_map 				\
+				ft_get_map_copy 		\
+				ft_final_line			\
 				ft_intersect			\
+				ft_inter_tdis			\
+				ft_check 				\
 				ft_door 				\
 				ft_hook 				\
 				ft_node 				\
