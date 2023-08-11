@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:14:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/09 17:40:55 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:18:51 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	ft_get_floor_rgb(t_game *game, int fd, char  *line)
 {
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	while (line[i] && line[i] != ',')
@@ -118,7 +119,10 @@ void	ft_get_floor_rgb(t_game *game, int fd, char  *line)
 	j = i + 1;
 	while (line[j] && line[j] != ',')
 		j++;
-	game->fc.fr = ft_atoi(line + 2);
+	k = 1;
+	while (line[k] == ' ')
+		k++;	
+	game->fc.fr = ft_atoi(line + k);
 	game->fc.fg = ft_atoi(line + i + 1);
 	game->fc.fb = ft_atoi(line + j + 1);
 	game->fc.floor_rgb = (game->fc.fr << 16 | game->fc.fg << 8 | game->fc.fb);
@@ -129,6 +133,7 @@ void	ft_get_ceiling_rgb(t_game *game, int fd, char *line)
 {
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	while (line[i] && line[i] != ',')
@@ -136,7 +141,10 @@ void	ft_get_ceiling_rgb(t_game *game, int fd, char *line)
 	j = i + 1;
 	while (line[j] && line[j] != ',')
 		j++;
-	game->fc.cr = ft_atoi(line + 2);
+	k = 1;
+	while (line[k] == ' ')
+		k++;
+	game->fc.cr = ft_atoi(line + k);
 	game->fc.cg = ft_atoi(line + i + 1);
 	game->fc.cb = ft_atoi(line + j + 1);
 	game->fc.ceiling_rgb = (game->fc.cr << 16 | game->fc.cg << 8 | game->fc.cb);

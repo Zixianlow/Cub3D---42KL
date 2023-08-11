@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:29:05 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/09 16:22:34 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:15:34 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_get_texture_path(t_game *game, int fd)
 	int		i;
 	int		j;
 	int		c;
+	int		k;
 	char	*path;
 
 	i = 0;
@@ -69,48 +70,60 @@ void	ft_get_texture_path(t_game *game, int fd)
 		if (!(ft_strncmp(game->file[i], "NO ", 3)))
 		{
 			path = ft_strdup(game->file[i]);
-			if ((open(path + 3, O_RDWR)) == -1)
+			k = 2;
+			while (path[k] == ' ')
+				k++;
+			if ((open(path + k, O_RDWR)) == -1)
 			{
 				free(path);
 				break ;
 			}
-			ft_node_texture(game, path + 3, 1);
+			ft_node_texture(game, path + k, 1);
 			free(path);
 			c++;
 		}
 		else if (!(ft_strncmp(game->file[i], "SO ", 3)))
 		{
 			path = ft_strdup(game->file[i]);
-			if ((open(path + 3, O_RDWR)) == -1)
+			k = 2;
+			while (path[k] == ' ')
+				k++;
+			if ((open(path + k, O_RDWR)) == -1)
 			{
 				free(path);
 				break ;
 			}
-			ft_node_texture(game, path + 3, 2);
+			ft_node_texture(game, path + k, 2);
 			free(path);
 			c++;
 		}
 		else if (!(ft_strncmp(game->file[i], "WE ", 3)))
 		{
 			path = ft_strdup(game->file[i]);
-			if ((open(path + 3, O_RDWR)) == -1)
+			k = 2;
+			while (path[k] == ' ')
+				k++;
+			if ((open(path + k, O_RDWR)) == -1)
 			{
 				free(path);
 				break ;
 			}
-			ft_node_texture(game, path + 3, 3);
+			ft_node_texture(game, path + k, 3);
 			free(path);
 			c++;
 		}
 		else if (!(ft_strncmp(game->file[i], "EA ", 3)))
 		{
 			path = ft_strdup(game->file[i]);
-			if ((open(path + 3, O_RDWR)) == -1)
+			k = 2;
+			while (path[k] == ' ')
+				k++;
+			if ((open(path + k, O_RDWR)) == -1)
 			{
 				free(path);
 				break ;
 			}
-			ft_node_texture(game, path + 3, 4);
+			ft_node_texture(game, path + k, 4);
 			free(path);
 			c++;
 		}
