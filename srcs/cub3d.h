@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/12 13:26:18 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/12 15:42:43 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ typedef struct s_tex
 	struct s_tex	*next;
 }	t_tex;
 
+typedef struct s_gun
+{
+	void	*gun1;
+	void	*gun2;
+	void	*gun3;
+	void	*gun4;
+}	t_gun;
+
 typedef struct s_dis
 {
 	double	sh;
@@ -90,12 +98,15 @@ typedef struct s_inter
 typedef struct s_game
 {
 	int			frame;
+	int			gunframe;
 	int			type;
+	int			guntype;
 	int			map_i;
 	double		posx;
 	void		*mlx;
 	void		*win;
 	t_fc		fc;
+	t_gun		gun;
 	t_tex		*tex;
 	t_dis		dis;
 	t_inter		v;
@@ -137,5 +148,6 @@ int		ft_check_valid(t_game *game, char **final);
 char	**ft_final_line(t_game *game, int maxlen);
 void	ft_perror_exit(char *s, t_game *game, int type);
 void	ft_wall_collision(t_game *game, int move);
+void	ft_get_gun_pic(t_game *game);
 
 #endif

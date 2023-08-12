@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/12 13:26:35 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/12 15:44:37 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ MAN_FILES	=	main					\
 				ft_get_file_map 		\
 				ft_get_line 			\
 				ft_get_map 				\
+				ft_get_gun				\
 				ft_get_map_copy 		\
 				ft_final_line			\
 				ft_intersect			\
@@ -41,7 +42,7 @@ SRCS        =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(MAN_FILES)))
 OBJS        =	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(MAN_FILES)))
 ARCR		= 	ar cr 
 RMRF		=	rm -rf
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS		=	-Wall -Wextra -Werror
 GCC			=	gcc
 
 
