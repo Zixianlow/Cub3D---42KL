@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/09 16:49:55 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:26:04 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-		return (0);
-	game.tune = 1;
+		ft_perror_exit("Please use: ./cub3d (valid_map_path)\n", &game, 0);
 	game.tex = NULL;
+	game.line = NULL;
 	game.mlx = mlx_init();
 	game.frame = 0;
 	game.type = 0;
 	if (ft_get_map(&game, av[1]))
-		return (0);
+		ft_perror_exit("Invalid map path\n", &game, 0);
 	ft_get_line(&game);
 	game.win = mlx_new_window(game.mlx, MAP_W * TILE_SIZE,
 			MAP_H * TILE_SIZE, "cub3d");

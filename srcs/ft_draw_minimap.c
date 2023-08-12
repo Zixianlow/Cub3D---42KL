@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:25:48 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/09 17:40:02 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:04:05 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_y(t_game *game, double my)
 {
-	return ((int)(game->player.y - my / 25 + 5));
+	return ((int)(game->player.y + my / 25 - 5));
 }
 
 int	get_x(t_game *game, double mx)
@@ -45,11 +45,7 @@ void	ft_draw_minimap(t_game *game)
 	double	mx;
 	double	my;
 	int		l;
-	int		m;
 
-	m = 0;
-	while (game->map[m])
-		m++;
 	mx = 0;
 	while (mx <= 150)
 	{
@@ -57,7 +53,7 @@ void	ft_draw_minimap(t_game *game)
 		while (my <= 250)
 		{
 			if (get_x(game, mx) >= 0 && get_y(game, my) >= 0
-				&& get_x(game, mx) <= m && game->map[get_x(game, mx)])
+				&& get_x(game, mx) <= game->map_i && game->map[get_x(game, mx)])
 				ft_color_minimap(game, mx, my);
 			else
 				mlx_pixel_put(game->mlx, game->win, my, mx, 0xFFFFFF);

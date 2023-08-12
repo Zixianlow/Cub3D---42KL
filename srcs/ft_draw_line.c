@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:49:46 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/08 19:28:51 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:59:08 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_draw_line(t_game *game, double x1, double y1, double a)
 		if (x >= 0 && x <= 150 && y >= 0 && y <= 250)
 			mlx_pixel_put(game->mlx, game->win, y, x, 0xFF0000);
 		x += ft_x_increment(game, ft_dx(game, a, x1), step);
-		y -= ft_y_increment(game, ft_dy(game, a, y1), step);
+		y += ft_y_increment(game, ft_dy(game, a, y1), step);
 		i++;
 	}
 }

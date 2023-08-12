@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 15:37:49 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:41:03 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,13 @@
 
 void	ft_node_dis(t_game *game, double d, double a)
 {
-	double	i;
-	double	j;
-	double	diff;
-
-	i = 0;
-	diff = a - game->player.angle;
 	d = sqrt(d);
-	d *= cos(diff);
+	d *= cos(a - game->player.angle);
 	d = fabs(d);
 	if (d < 0.01)
 		d = 0.01;
-	i = 1.5 / d;
-	j = (1 - i) / 2;
-	game->dis.sh = j;
-	game->dis.wh = i;
-	game->dis.fh = j;
+	game->dis.wh = 1.5 / d;
+	game->dis.sh = (1 - game->dis.wh) / 2;
 }
 
 void	ft_draw_player(t_game *game)
@@ -44,12 +35,15 @@ void	ft_draw_player(t_game *game)
 	a = game->player.angle - M_PI * 8 / 72;
 	while (i < 640)
 	{
-		line_x = game->player.x + (cos(a) * 10);
-		line_y = game->player.y + (sin(a) * 10);
-		ft_draw_line(game, game->player.x, game->player.y, a);
-		dis = ft_intersect(game, &line_x, &line_y);
-		ft_node_dis(game, dis, a);
-		ft_draw_view(game, i);
+		if (i % 2 == 0)
+		{
+			line_x = game->player.x + (cos(a) * 10);
+			line_y = game->player.y + (sin(a) * 10);
+			dis = ft_intersect(game, &line_x, &line_y);
+			ft_node_dis(game, dis, a);
+			ft_draw_line(game, game->player.x, game->player.y, a);
+		}
+		ft_draw_view(game, 640 - i);
 		a += M_PI * 0.025 / 72;
 		i++;
 	}

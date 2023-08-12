@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:30:10 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:30:43 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:26:48 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,9 @@ void	ft_map2(t_game *game)
 		i++;
 	game->map2 = malloc(sizeof(char *) * i + 1);
 	game->map2[i] = 0;
-	i = 0;
-	while (game->map[i])
-	{
+	i = -1;
+	while (game->map[++i])
 		game->map2[i] = ft_strdup(game->map[i]);
-		i++;
-	}
 }
 
 void	ft_makemap(t_game *game, int maxlen)

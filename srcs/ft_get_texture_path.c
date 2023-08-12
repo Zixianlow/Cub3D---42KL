@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:29:05 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 16:05:22 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:54:16 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 	while (i < n)
 	{
 		if (str1[i] != str2[i] || !str1[i] || !str2[i])
-		{
 			return (str1[i] - str2[i]);
-		}
 		i++;
 	}
 	return (0);
@@ -58,17 +56,20 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 int	ft_texture_check_set(t_game *game, int i, int *c, int type)
 {
 	int		k;
+	int		fd;
 	char	*path;
 
 	path = ft_strdup(game->file[i]);
 	k = 2;
 	while (path[k] == ' ')
 		k++;
-	if ((open(path + k, O_RDWR)) == -1)
+	fd = open(path + k, O_RDWR);
+	if (fd == -1)
 	{
 		free(path);
 		return (1);
 	}
+	close(fd);
 	ft_node_texture(game, path + k, type);
 	free(path);
 	(*c)++;
@@ -114,10 +115,7 @@ void	ft_get_texture_path(t_game *game, int fd)
 			break ;
 	}
 	if (c != 4)
-	{
-		printf("invalid texture");
-		exit(0);
-	}
+		ft_perror_exit("Invalid texture found", game, 2);
 	ft_node_texture(game, "./assets/door.xpm", 5);
 	ft_node_texture(game, "./assets/door.xpm", 6);
 }

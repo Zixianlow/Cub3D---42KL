@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:10:51 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:12:09 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:35:33 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,20 @@ int	ft_check_valid_pad(char **final, int i, int k)
 	return (0);
 }
 
+void	ft_free_map2_final(t_game *game, char **final)
+{
+	int	i;
+
+	i = -1;
+	while (game->map2[++i])
+		free(game->map2[i]);
+	free(game->map2);
+	i = -1;
+	while (final[++i])
+		free(final[i]);
+	free(final);
+}
+
 int	ft_check_valid(t_game *game, char **final)
 {
 	int	i;
@@ -80,17 +94,15 @@ int	ft_check_valid(t_game *game, char **final)
 		while (final[i][++k])
 		{
 			if (final[i][k] == 's')
+			{
 				if (ft_check_valid_pad(final, i, k))
+				{
+					ft_free_map2_final(game, final);
 					return (0);
+				}
+			}
 		}
 	}
-	i = -1;
-	while (game->map2[++i])
-		free(game->map2[i]);
-	free(game->map2);
-	i = -1;
-	while (final[++i])
-		free(final[i]);
-	free(final);
+	ft_free_map2_final(game, final);
 	return (1);
 }

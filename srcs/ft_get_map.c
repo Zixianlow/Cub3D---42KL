@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:14:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:30:30 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:26:57 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,25 @@ int	ft_getlen(t_game *game)
 	int	j;
 	int	maxlen;
 
-	i = 0;
+	i = -1;
 	maxlen = 0;
-	while (game->map[i])
+	while (game->map[++i])
 	{
 		j = 0;
 		while (game->map[i][j])
 			j++;
 		if (j > maxlen)
 			maxlen = j;
-		i++;
 	}
+	game->map_i = i;
 	return (maxlen);
-}
-
-void	ft_perror_exit(char *s)
-{
-	printf("%s", s);
-	exit(0);
 }
 
 void	ft_get_game_elment(t_game *game, int fd)
 {
 	ft_get_texture_path(game, fd);
-	ft_get_floor_rgb(game, fd, check_f(game));
-	ft_get_ceiling_rgb(game, fd, check_c(game));
+	ft_get_floor_rgb(game, fd, ft_check_cf(game, 'F'));
+	ft_get_ceiling_rgb(game, fd, ft_check_cf(game, 'C'));
 	ft_get_map_tile(game, fd);
 	ft_map2(game);
 	ft_makemap(game, ft_getlen(game));
@@ -65,14 +59,14 @@ int	ft_get_map(t_game *game, char *path)
 		return (1);
 	fd = open(path, O_RDONLY);
 	if (fd <= 0)
-		exit(0);
+		ft_perror_exit("Error opening map file\n", game, 0);
 	ft_get_file(game, fd);
 	if (!(ft_check_element(game)))
-		ft_perror_exit("invalid element");
+		ft_perror_exit("Invalid element count\n", game, 1);
 	ft_get_game_elment(game, fd);
 	final = ft_final_line(game, ft_getlen(game));
 	if (!(ft_check_valid(game, final)))
-		ft_perror_exit("invalid map");
+		ft_perror_exit("Map is invalid", game, 2);
 	close(fd);
 	return (0);
 }

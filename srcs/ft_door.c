@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:51:14 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/09 17:30:44 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:05:00 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,11 @@ void	ft_door_line(t_game *game, int px, int py)
 
 void	ft_door_open(t_game *game)
 {
-	int	m;
 	int	l;
 
-	m = 0;
-	while (game->map[m])
-		m++;
-	if (game->player.x + 2 < m)
+	if (game->player.x + 2 < game->map_i)
 		ft_door_line(game, game->player.x + 2, game->player.y);
-	if (game->player.x + 1 < m)
+	if (game->player.x + 1 < game->map_i)
 		ft_door_line(game, game->player.x + 1, game->player.y);
 	if (game->player.x - 2 >= 0)
 		ft_door_line(game, game->player.x - 2, game->player.y);

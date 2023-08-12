@@ -6,13 +6,13 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:51:11 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:25:29 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:33:05 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*check_f(t_game *game)
+char	*ft_check_cf(t_game *game, char ch)
 {
 	char	*path;
 	int		check;
@@ -22,29 +22,7 @@ char	*check_f(t_game *game)
 	i = 0;
 	while (game->file[i])
 	{
-		if (game->file[i][0] == 'F')
-		{
-			path = ft_strdup(game->file[i]);
-			check++;
-		}
-		i++;
-	}
-	if (check == 1)
-		return (path);
-	return (0);
-}
-
-char	*check_c(t_game *game)
-{
-	char	*path;
-	int		check;
-	int		i;
-
-	check = 0;
-	i = 0;
-	while (game->file[i])
-	{
-		if (game->file[i][0] == 'C')
+		if (game->file[i][0] == ch)
 		{
 			path = ft_strdup(game->file[i]);
 			check++;

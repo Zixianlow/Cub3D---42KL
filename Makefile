@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/11 17:31:17 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/12 13:26:35 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ MAN_FILES	=	main					\
 				ft_final_line			\
 				ft_intersect			\
 				ft_inter_tdis			\
+				ft_wall_collision		\
 				ft_check 				\
+				ft_error 				\
 				ft_door 				\
 				ft_hook 				\
 				ft_node 				\

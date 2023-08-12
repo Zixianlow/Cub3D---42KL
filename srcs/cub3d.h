@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:30:52 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/12 13:26:18 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_dis
 {
 	double	sh;
 	double	wh;
-	double	fh;
 }	t_dis;
 
 typedef struct s_inter
@@ -90,9 +89,9 @@ typedef struct s_inter
 
 typedef struct s_game
 {
-	double		tune;
 	int			frame;
 	int			type;
+	int			map_i;
 	double		posx;
 	void		*mlx;
 	void		*win;
@@ -128,14 +127,15 @@ double	ft_intersect(t_game *game, double *lx, double *ly);
 void	ft_get_tdis(t_game *game, double *lx, double *ly, t_inter *v);
 void	ft_map2(t_game *game);
 void	ft_makemap(t_game *game, int maxlen);
+char	*ft_check_cf(t_game *game, char ch);
 void	ft_get_file(t_game *game, int fd);
 void	ft_get_map_tile(t_game *game, int fd);
-char	*check_f(t_game *game);
-char	*check_c(t_game *game);
 void	ft_get_floor_rgb(t_game *game, int fd, char *line);
 void	ft_get_ceiling_rgb(t_game *game, int fd, char *line);
 int		ft_check_element(t_game *game);
 int		ft_check_valid(t_game *game, char **final);
 char	**ft_final_line(t_game *game, int maxlen);
+void	ft_perror_exit(char *s, t_game *game, int type);
+void	ft_wall_collision(t_game *game, int move);
 
 #endif
