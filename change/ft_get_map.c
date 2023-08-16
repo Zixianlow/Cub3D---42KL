@@ -6,28 +6,11 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:14:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/16 21:07:18 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 19:26:57 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_check_line(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s[i] == 32)
-	{
-		while (s[i] == 32)
-			i++;
-		if (s[i])
-			return (1);
-	}
-	else if (s[i] != '\n')
-		return (1);
-	return (0);
-}
 
 int	ft_getlen(t_game *game)
 {

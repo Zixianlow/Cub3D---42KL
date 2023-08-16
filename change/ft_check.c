@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:10:51 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/16 21:05:54 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/11 20:35:33 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,31 @@ int	ft_check_all_one(int *a)
 
 int	ft_check_element(t_game *game)
 {
-	int	a[7];
+	int	i;
+	int	a[6];
 
-	a[6] = -1;
-	while (++a[6] < 6)
-		a[a[6]] = 0;
-	a[6] = -1;
-	while (game->file[++a[6]])
+	i = -1;
+	while (++i < 6)
+		a[i] = 0;
+	i = -1;
+	while (game->file[++i])
 	{
-		if (!(ft_strncmp(game->file[a[6]], "F ", 2)))
+		if (game->file[i][0] == 'F')
 			a[0]++;
-		else if (!(ft_strncmp(game->file[a[6]], "C ", 2)))
+		else if (game->file[i][0] == 'C')
 			a[1]++;
-		else if (!(ft_strncmp(game->file[a[6]], "NO ", 3)))
+		else if (game->file[i][0] == 'N')
 			a[2]++;
-		else if (!(ft_strncmp(game->file[a[6]], "SO ", 3)))
+		else if (game->file[i][0] == 'S')
 			a[3]++;
-		else if (!(ft_strncmp(game->file[a[6]], "EA ", 3)))
+		else if (game->file[i][0] == 'W')
 			a[4]++;
-		else if (!(ft_strncmp(game->file[a[6]], "WE ", 3)))
+		else if (game->file[i][0] == 'E')
 			a[5]++;
-		else if (ft_check_line(game->file[a[6]]))
-			break ;
 	}
-	return (ft_check_all_one(a));
+	if (ft_check_all_one(a))
+		return (1);
+	return (0);
 }
 
 int	ft_check_valid_pad(char **final, int i, int k)

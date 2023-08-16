@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/16 21:07:30 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/12 15:42:43 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,5 @@ char	**ft_final_line(t_game *game, int maxlen);
 void	ft_perror_exit(char *s, t_game *game, int type);
 void	ft_wall_collision(t_game *game, int move);
 void	ft_get_gun_pic(t_game *game);
-int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
-int		ft_check_line(char *s);
 
 #endif
