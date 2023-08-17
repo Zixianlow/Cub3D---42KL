@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/17 16:16:58 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:09:51 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,7 @@ void	ft_get_gun_pic(t_game *game);
 int		ft_strncmp(const char *s1, const char *s2, unsigned int n);
 int		ft_check_line(char *s);
 int		ft_check_map(t_game *game);
+int		render_next_frame(t_game *game, int type);
+int		ft_change_pos(t_game *game, double i, double j);
 
 #endif

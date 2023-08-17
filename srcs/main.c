@@ -6,53 +6,25 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/12 15:42:29 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:22:05 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_put_gun(t_game *game, int type)
-{
-	if (type == 0)
-		mlx_put_image_to_window(game->mlx, game->win, game->gun.gun1, 300, 380);
-	if (type == 1)
-		mlx_put_image_to_window(game->mlx, game->win, game->gun.gun2, 300, 380);
-	if (type == 2)
-		mlx_put_image_to_window(game->mlx, game->win, game->gun.gun3, 300, 380);
-	if (type == 3)
-		mlx_put_image_to_window(game->mlx, game->win, game->gun.gun4, 300, 380);
-}
-
-int	render_next_frame(t_game *game, int type)
-{
-	ft_draw_player(game);
-	ft_draw_minimap(game);
-	ft_put_gun(game, type);
-	return (0);
-}
-
 int	ft_animate(t_game *game)
 {
 	game->frame++;
 	game->gunframe++;
-	if (game->frame % 500 == 1)
+	if (game->frame % 5 == 1 && game->gunframe < 50)
 	{
 		mlx_clear_window(game->mlx, game->win);
-		if (game->gunframe > 80)
-			render_next_frame(game, 0);
-		else
-			render_next_frame(game, game->gunframe / 20);
-	}
-	if (game->frame % 10 == 1 && game->gunframe < 80)
-	{
-		mlx_clear_window(game->mlx, game->win);
-		render_next_frame(game, game->gunframe / 20);
+		render_next_frame(game, game->gunframe / 10);
 	}
 	if (game->gunframe == 10000)
 		game->gunframe = 2500;
-	if (game->frame == 6000)
-		game->frame = 0;
+	if (game->gunframe == 10000)
+		game->gunframe = 0;
 	return (0);
 }
 

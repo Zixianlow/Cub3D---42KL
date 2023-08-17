@@ -6,7 +6,7 @@
 #    By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 17:17:14 by lzi-xian          #+#    #+#              #
-#    Updated: 2023/08/17 16:17:12 by lzi-xian         ###   ########.fr        #
+#    Updated: 2023/08/17 17:10:08 by lzi-xian         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ MAN_FILES	=	main					\
 				ft_intersect			\
 				ft_inter_tdis			\
 				ft_wall_collision		\
+				ft_render 				\
+				ft_change_pos 			\
 				ft_check_map 			\
 				ft_check 				\
 				ft_error 				\
@@ -43,7 +45,7 @@ SRCS        =	$(addprefix $(SRC_DIR), $(addsuffix .c, $(MAN_FILES)))
 OBJS        =	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(MAN_FILES)))
 ARCR		= 	ar cr 
 RMRF		=	rm -rf
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address -g3
 GCC			=	gcc
 
 

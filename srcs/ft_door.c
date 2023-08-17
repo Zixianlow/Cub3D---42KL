@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:51:14 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 18:05:00 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:15:40 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	ft_door_open(t_game *game)
 		ft_door_line(game, game->player.x, game->player.y - 2);
 	if (game->player.y - 1 >= 0)
 		ft_door_line(game, game->player.x, game->player.y - 1);
+	ft_change_pos(game, game->player.x, game->player.y);
 }

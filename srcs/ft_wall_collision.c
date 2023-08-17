@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:25:31 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/12 14:33:07 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/17 17:09:35 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ int	ft_move_decision(t_game *game, double i, double j)
 		a += M_PI / 2;
 	}
 	if (c == 4)
-	{
-		game->player.x = i;
-		game->player.y = j;
-		return (1);
-	}
+		return (ft_change_pos(game, i, j));
 	return (0);
 }
 
@@ -61,9 +57,9 @@ void	ft_slide_type(t_game *game, double a, int type)
 		&& (game->map[x][y2] == '1' || game->map[x][y2] == '2'))
 		return ;
 	else if (game->map[x2][y] == '1' || game->map[x2][y] == '2')
-		game->player.y += 0.1 * sin(a);
+		ft_change_pos(game, game->player.x, game->player.y + 0.1 * sin(a));
 	else if (game->map[x][y2] == '1' || game->map[x][y2] == '2')
-		game->player.x += 0.1 * cos(a);
+		ft_change_pos(game, game->player.x + 0.1 * sin(a), game->player.y);
 }
 
 void	ft_wall_slide(t_game *game, double a)
