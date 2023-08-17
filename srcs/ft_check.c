@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:10:51 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/16 21:05:54 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/17 16:16:23 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	ft_check_valid(t_game *game, char **final)
 			}
 		}
 	}
+	if (ft_check_map(game))
+		return (0);
 	ft_free_map2_final(game, final);
 	return (1);
 }
