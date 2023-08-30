@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:35:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/17 17:22:05 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:37:31 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	ft_animate(t_game *game)
 	}
 	if (game->gunframe == 10000)
 		game->gunframe = 2500;
-	if (game->gunframe == 10000)
-		game->gunframe = 0;
+	if (game->frame == 10000)
+		game->frame = 0;
 	return (0);
 }
 

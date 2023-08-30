@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:45:31 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/12 13:20:11 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/18 16:39:26 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,45 +23,41 @@ void	ft_draw_wall(t_game *game, int y, int pos, double *a)
 	int				old_x;
 	int				old_y;
 	int				old_index;
-	unsigned int	color;
 
 	temp = game->tex;
 	while (temp->next)
 	{
-		if (temp->type != game->type)
-			temp = temp->next;
-		else
+		if (temp->type == game->type)
 			break ;
+		temp = temp->next;
 	}
-	while (++y < a[0] + a[1])
+	while (++y < a[2])
 	{
 		old_x = game->posx * temp->img_w;
 		old_y = (y - a[0]) * temp->img_h / a[1];
-		if (old_y >= 0 && old_x >= 0)
-		{
-			old_index = (old_y * temp->img_w + old_x) * 4;
-			color = ft_get_color(temp->img_data, old_index);
-			mlx_pixel_put(game->mlx, game->win, pos, y, color);
-		}
+		old_index = (old_y * temp->img_w + old_x) * 4;
+		mlx_pixel_put(game->mlx, game->win, pos, y,
+			ft_get_color(temp->img_data, old_index));
 	}
 }
 
 void	ft_draw_view(t_game *game, int pos)
 {
 	int		y;
-	double	a[2];
+	double	a[3];
 
-	y = -1;
 	a[0] = game->dis.sh * 10 * TILE_SIZE;
-	a[1] = ceil(game->dis.wh * 10 * TILE_SIZE);
+	a[1] = game->dis.wh * 10 * TILE_SIZE;
+	a[2] = a[0] + a[1];
+	y = -1;
 	if (pos < 251)
-		y = 150;
-	while (a[1] < 640 && ++y < a[0])
+		y = 149;
+	while (++y < a[0])
 		mlx_pixel_put(game->mlx, game->win, pos, y, game->fc.ceiling_rgb);
-	y = 10 * TILE_SIZE + 1;
-	while (a[0] < 640 && --y > a[0] + a[1])
+	y = 10 * TILE_SIZE;
+	while (--y > a[2])
 		mlx_pixel_put(game->mlx, game->win, pos, y, game->fc.floor_rgb);
-	y = a[0] - 1;
+	y = a[0];
 	if (pos < 251)
 		if (a[0] < 150)
 			y = 149;

@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:53:50 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/17 17:26:56 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/18 15:59:15 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	mouse_hook(int x, int y, t_game *game)
 	dx = x - prev_x;
 	if (abs(dx) > 5)
 	{
-		game->player.angle -= M_PI * dx / 1440;
+		game->player.angle -= M_PI * dx / 1080;
 		prev_x = x;
 		ft_change_pos(game, game->player.x, game->player.y);
 	}
