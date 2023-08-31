@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:30:28 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/18 16:32:13 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:19:12 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_node_dis(t_game *game, double d, double a)
 {
-	d = sqrt(d);
+	d = sqrt(d) * 1.5;
 	d *= fabs(cos(a - game->player.angle));
 	game->dis.wh = 1.5 / d;
 	game->dis.sh = (1 - game->dis.wh) / 2;

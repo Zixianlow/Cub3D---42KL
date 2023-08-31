@@ -3,7 +3,7 @@ SO ./assets/door_open.xpm
 WE ./assets/floor.xpm
 
     
-F      220,100,0     
+F      220,100,0  
 EA ./assets/wall.xpm
     
 
