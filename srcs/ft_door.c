@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:51:14 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/17 17:15:40 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:16:23 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 void	ft_remove_line(t_game *game, int px, int py)
 {
 	t_line	*temp;
+	t_line	*hold;
 
 	temp = game->line;
-	while (temp->next->next)
+	hold = game->line;
+	while (temp && temp->next && temp->next->next)
 	{
 		if (temp->next->x == px && temp->next->y == py)
 		{
+			free(hold->next);
+			free(hold->next->next);
+			free(hold->next->next->next);
+			free(hold->next->next->next->next);
 			temp->next = temp->next->next->next->next->next;
 			break ;
 		}
+		hold = hold->next;
 		temp = temp->next;
 	}
 }

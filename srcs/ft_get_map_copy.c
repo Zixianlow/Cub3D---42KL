@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:30:10 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 20:26:48 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:09:18 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ft_map2(t_game *game)
 	i = 0;
 	while (game->map[i])
 		i++;
-	game->map2 = malloc(sizeof(char *) * i + 1);
-	game->map2[i] = 0;
+	game->map2 = malloc(sizeof(char *) * (i + 1));
+	game->map2[i] = NULL;
 	i = -1;
 	while (game->map[++i])
 		game->map2[i] = ft_strdup(game->map[i]);
@@ -39,18 +39,16 @@ void	ft_makemap(t_game *game, int maxlen)
 		j = 0;
 		while (game->map2[i][j])
 			j++;
-		if (j <= maxlen)
-		{
-			store = ft_strdup(game->map2[i]);
-			free(game->map2[i]);
-			game->map2[i] = malloc(sizeof(char) * maxlen + 1);
-			game->map2[i][maxlen] = '\0';
-		}
+		store = ft_strdup(game->map2[i]);
+		free(game->map2[i]);
+		game->map2[i] = malloc(sizeof(char) * maxlen + 1);
+		game->map2[i][maxlen] = '\0';
 		t = -1;
 		while (store[++t])
 			game->map2[i][t] = store[t];
 		j--;
 		while (++j < maxlen)
 			game->map2[i][j] = 32;
+		free(store);
 	}
 }

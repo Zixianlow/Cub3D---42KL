@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:18:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:23:15 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:46:37 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**ft_final_line(t_game *game, int maxlen)
 	char	**final;
 	int		i;
 	int		k;
-	int		l;
 
 	i = 0;
 	while (game->map2[i])

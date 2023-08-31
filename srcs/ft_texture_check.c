@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:51:11 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 20:33:05 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:50:42 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_check_cf(t_game *game, char ch)
 	return (0);
 }
 
-void	ft_get_floor_rgb(t_game *game, int fd, char *line)
+void	ft_get_floor_rgb(t_game *game, char *line)
 {
 	int		i;
 	int		j;
@@ -56,7 +56,7 @@ void	ft_get_floor_rgb(t_game *game, int fd, char *line)
 	free(line);
 }
 
-void	ft_get_ceiling_rgb(t_game *game, int fd, char *line)
+void	ft_get_ceiling_rgb(t_game *game, char *line)
 {
 	int		i;
 	int		j;

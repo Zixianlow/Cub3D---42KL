@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 13:25:31 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/18 16:35:14 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:44:44 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int	ft_move_decision(t_game *game, double i, double j)
 	double	a;
 
 	c = 0;
+	a = 0.0;
 	while (a != 2 * M_PI)
 	{
-		x = i + 0.2 * cos(a);
-		y = j + 0.2 * sin(a);
+		x = i + 0.15 * cos(a);
+		y = j + 0.15 * sin(a);
 		if (game->map[x][y] != '1' && game->map[x][y] != '2')
 			c++;
 		a += M_PI / 2;

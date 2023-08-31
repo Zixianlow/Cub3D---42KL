@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:27:20 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:28:29 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:22:34 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ char	**ft_free_and_malloc(char **str, int h)
 	int		i;
 
 	dest = malloc(sizeof(char *) * h);
+	i = -1;
 	if (!dest)
 	{
-		while (str[i])
-			free(str[i++]);
+		while (str[++i])
+			free(str[i]);
 		free(str);
 		return (NULL);
 	}
@@ -30,7 +31,6 @@ char	**ft_free_and_malloc(char **str, int h)
 		free(dest);
 		return (NULL);
 	}
-	i = -1;
 	while (++i < h - 1)
 	{
 		dest[i] = ft_strdup(str[i]);
@@ -82,7 +82,7 @@ int	ft_get_map_tile_first(t_game *game, int h, int fd)
 	l = ft_strlen(game->map[h]);
 	if (game->map[h][l - 1] == '\n')
 		game->map[h][l - 1] = '\0';
-	(h)++;
+	h++;
 	game->map = ft_free_and_malloc(game->map, h + 1);
 	return (h);
 }

@@ -6,18 +6,18 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 18:49:46 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 17:59:08 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:46:29 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	ft_y_increment(t_game *game, double delta_y, double step)
+double	ft_y_increment(double delta_y, double step)
 {
 	return (delta_y / step);
 }
 
-double	ft_x_increment(t_game *game, double delta_x, double step)
+double	ft_x_increment(double delta_x, double step)
 {
 	return (delta_x / step);
 }
@@ -47,8 +47,8 @@ void	ft_draw_line(t_game *game, double x1, double y1, double a)
 	{
 		if (x >= 0 && x <= 150 && y >= 0 && y <= 250)
 			mlx_pixel_put(game->mlx, game->win, y, x, 0xFF0000);
-		x += ft_x_increment(game, ft_dx(game, a, x1), step);
-		y += ft_y_increment(game, ft_dy(game, a, y1), step);
+		x += ft_x_increment(ft_dx(game, a, x1), step);
+		y += ft_y_increment(ft_dy(game, a, y1), step);
 		i++;
 	}
 }

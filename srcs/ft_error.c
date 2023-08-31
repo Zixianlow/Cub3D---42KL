@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:03:56 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/12 15:38:17 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:23:18 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	ft_destroy_game_gun(t_game *game)
 
 void	ft_free_game_map_line(t_game *game)
 {
-	int	i;
+	int		i;
+	t_line	*temp;
 
 	i = -1;
 	while (game->line)
 	{
-		free(game->line);
+		temp = game->line;
 		game->line = game->line->next;
+		free(temp);
 	}
 	i = -1;
 	while (game->map[++i])
@@ -38,11 +40,14 @@ void	ft_free_game_map_line(t_game *game)
 
 void	ft_free_game_tex(t_game *game)
 {
+	t_tex	*temp;
+
 	while (game->tex)
 	{
 		mlx_destroy_image(game->mlx, game->tex->img);
-		free(game->tex);
+		temp = game->tex;
 		game->tex = game->tex->next;
+		free(temp);
 	}
 }
 

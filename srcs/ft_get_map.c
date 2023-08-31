@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:14:18 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/16 21:07:18 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:08:38 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	ft_getlen(t_game *game)
 
 void	ft_get_game_elment(t_game *game, int fd)
 {
-	ft_get_texture_path(game, fd);
-	ft_get_floor_rgb(game, fd, ft_check_cf(game, 'F'));
-	ft_get_ceiling_rgb(game, fd, ft_check_cf(game, 'C'));
+	ft_get_texture_path(game);
+	ft_get_floor_rgb(game, ft_check_cf(game, 'F'));
+	ft_get_ceiling_rgb(game, ft_check_cf(game, 'C'));
 	ft_get_map_tile(game, fd);
 	ft_map2(game);
 	ft_makemap(game, ft_getlen(game));
@@ -82,8 +82,8 @@ int	ft_get_map(t_game *game, char *path)
 		ft_perror_exit("Invalid element count\n", game, 1);
 	ft_get_game_elment(game, fd);
 	final = ft_final_line(game, ft_getlen(game));
-	if (!(ft_check_valid(game, final)))
-		ft_perror_exit("Map is invalid", game, 2);
+	if (!(ft_check_valid(game, &final)))
+		ft_perror_exit("Map is invalid", game, 3);
 	close(fd);
 	return (0);
 }

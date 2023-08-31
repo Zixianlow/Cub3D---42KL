@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 18:20:35 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/17 17:09:51 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:30:26 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_game
 	char		**file;
 }	t_game;
 
-void	ft_get_texture_path(t_game *game, int fd);
+void	ft_get_texture_path(t_game *game);
 int		ft_get_map(t_game *game, char *path);
 void	ft_draw_minimap(t_game *game);
 void	ft_get_line(t_game *game);
@@ -141,10 +141,10 @@ void	ft_makemap(t_game *game, int maxlen);
 char	*ft_check_cf(t_game *game, char ch);
 void	ft_get_file(t_game *game, int fd);
 void	ft_get_map_tile(t_game *game, int fd);
-void	ft_get_floor_rgb(t_game *game, int fd, char *line);
-void	ft_get_ceiling_rgb(t_game *game, int fd, char *line);
+void	ft_get_floor_rgb(t_game *game, char *line);
+void	ft_get_ceiling_rgb(t_game *game, char *line);
 int		ft_check_element(t_game *game);
-int		ft_check_valid(t_game *game, char **final);
+int		ft_check_valid(t_game *game, char ***final);
 char	**ft_final_line(t_game *game, int maxlen);
 void	ft_perror_exit(char *s, t_game *game, int type);
 void	ft_wall_collision(t_game *game, int move);

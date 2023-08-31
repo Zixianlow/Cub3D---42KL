@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:25:48 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 18:04:05 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:46:34 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_draw_minimap(t_game *game)
 {
 	double	mx;
 	double	my;
-	int		l;
 
 	mx = 0;
 	while (mx <= 150)

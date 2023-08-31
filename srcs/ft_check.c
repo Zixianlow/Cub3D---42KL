@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:10:51 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/30 21:10:28 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:22:14 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_element(t_game *game)
 	return (ft_check_all_one(a));
 }
 
-int	ft_check_valid_pad(char **final, int i, int k)
+int	ft_check_valid_pad(char *(*final), int i, int k)
 {
 	if (final[i][k - 1] == '2' || final[i][k - 1] == '0')
 		return (1);
@@ -67,7 +67,7 @@ int	ft_check_valid_pad(char **final, int i, int k)
 	return (0);
 }
 
-void	ft_free_map2_final(t_game *game, char **final)
+void	ft_free_map2_final(t_game *game, char **(*final))
 {
 	int	i;
 
@@ -76,25 +76,25 @@ void	ft_free_map2_final(t_game *game, char **final)
 		free(game->map2[i]);
 	free(game->map2);
 	i = -1;
-	while (final[++i])
-		free(final[i]);
-	free(final);
+	while ((*final)[++i])
+		free((*final)[i]);
+	free((*final));
 }
 
-int	ft_check_valid(t_game *game, char **final)
+int	ft_check_valid(t_game *game, char ***final)
 {
 	int	i;
 	int	k;
 
 	i = -1;
-	while (final[++i])
+	while ((*final)[++i])
 	{
 		k = -1;
-		while (final[i][++k])
+		while ((*final)[i][++k])
 		{
-			if (final[i][k] == 's')
+			if ((*final)[i][k] == 's')
 			{
-				if (ft_check_valid_pad(final, i, k))
+				if (ft_check_valid_pad((*final), i, k))
 				{
 					ft_free_map2_final(game, final);
 					return (0);
@@ -102,8 +102,8 @@ int	ft_check_valid(t_game *game, char **final)
 			}
 		}
 	}
+	ft_free_map2_final(game, final);
 	if (ft_check_map(game))
 		return (0);
-	ft_free_map2_final(game, final);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lzi-xian <lzi-xian@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 14:29:05 by lzi-xian          #+#    #+#             */
-/*   Updated: 2023/08/11 20:54:16 by lzi-xian         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:30:05 by lzi-xian         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,9 @@ int	ft_get_texture_path_loop(t_game *game, int i, int *c)
 	return (0);
 }
 
-void	ft_get_texture_path(t_game *game, int fd)
+void	ft_get_texture_path(t_game *game)
 {
 	int		i;
-	int		j;
 	int		c;
 
 	i = -1;
